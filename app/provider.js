@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 const Provider = ({children}) => {
+
+    useEffect(() => {
+
+    } , [])
   return (
     <div>
 
