@@ -68,7 +68,9 @@ const AppSidebar = () => {
       <SidebarContent>
          <SidebarGroup>
             <div className='mx-3 mt-10'>
+                <Link href={'/create-new-video'}>
                 <Button className= "w-full">+Create New video</Button>
+                </Link>
             </div>
             <SidebarMenu>
                 {MenuItems.map((menu, index) => (
