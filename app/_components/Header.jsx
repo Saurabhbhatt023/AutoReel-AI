@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import Authentication from './Authentication'
 import { useAuthContext } from '../provider'
+import Link from 'next/link'
 
 const Header = () => {
   const { user } = useAuthContext()
@@ -27,7 +28,10 @@ const Header = () => {
           </Authentication>
         ) : (
           <div className="flex items-center gap-3">
+              <Link href={'./dashboard'}> 
             <Button>Dashboard</Button>
+            </Link>
+           
             {user.photoURL ? (
               <Image 
                 src={user.photoURL} 
