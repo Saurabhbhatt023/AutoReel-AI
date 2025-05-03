@@ -2,6 +2,7 @@ import { Geist, Geist_Mono, Outfit } from "next/font/google";
 import "./globals.css";
 import Provider from "./provider";
 import { Suspense } from "react";
+import ConvexClientProvider from "./ConvexClientProvider";
 
 export const metadata = {
   title: "Create Next App",
@@ -15,9 +16,10 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning={true}>
       <body className={outfit.className} suppressHydrationWarning={true}>
         <Suspense fallback={<div>Loading...</div>}>
-          <Provider>
+           <ConvexClientProvider> 
             {children}
-          </Provider>
+            </ConvexClientProvider>
+      
         </Suspense>
       </body>
     </html>
