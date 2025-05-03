@@ -5,12 +5,21 @@ import Image from 'next/image'
 import React from 'react'
 
 const AppHeader = () => {
-  const {user} = useAuthContext();
+  const {user, dbUser} = useAuthContext();
+  
+  // Use a fallback image if no user image is available
+  const profileImage = user?.photoURL || dbUser?.pictureURL || "/default-avatar.png";
 
   return (
     <div className='p-3 flex justify-between items-center'>
      <SidebarTrigger/>
-     <Image src = {user?.photoURL} alt = 'user' width = {40} height= {40} className='rounded-full'/>
+     <Image 
+        src={profileImage} 
+        alt='user' 
+        width={40} 
+        height={40} 
+        className='rounded-full'
+     />
     </div>
   )
 }

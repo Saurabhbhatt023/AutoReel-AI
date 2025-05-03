@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useContext } from 'react'
 import {
     Sidebar,
     SidebarContent,
@@ -10,12 +10,15 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
   } from "@/components/ui/sidebar"
-
+  
+  
   import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Gem, HomeIcon, LucideFileVideo, Search, WalletCards } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useAuthContext } from '@/app/provider'
+
 // import { usePathname } from 'next/navigation'
 
 const MenuItems = [
@@ -45,6 +48,7 @@ const MenuItems = [
 ]
 const AppSidebar = () => {
     const path = usePathname();
+    const {user, dbUser} = useAuthContext()
     console.log(path)
     
   return (
@@ -70,7 +74,7 @@ const AppSidebar = () => {
                 {MenuItems.map((menu, index) => (
                  
 
-                    <SidebarMenuItem className= "mt-3 mx-3">
+                    <SidebarMenuItem className= "mt-3 mx-3" key = {index}>
                         <SidebarMenuButton isActive = {path == menu.url} className= "p-5" >
                             <Link href= {menu.url} className='flex items-center gap-4 p-3'>
                               <menu.icon/>
@@ -87,7 +91,8 @@ const AppSidebar = () => {
     <div className='p-5 border rounded-lg mb-6 bg-gray-700'>  
         <div className='flex items-center justify-between'>
             <Gem className='text-gray-400'/>
-            <h2>5 Credits Left</h2>
+            <h2 className='text-gray-400'>{dbUser ? dbUser.credits : 0} Credits Left</h2>
+
         </div>
 
         <Button className= "w-full mt-3" > Buy More Credits</Button>
