@@ -8,9 +8,9 @@ const AppHeader = () => {
   const {user} = useAuthContext();
 
   return (
-    <div className='p-3'>
+    <div className='p-3 flex justify-between items-center'>
      <SidebarTrigger/>
-     <Image src = {user?.photoURL} alt = 'user' width = {40} height= {40}/>
+     <Image src = {user?.photoURL} alt = 'user' width = {40} height= {40} className='rounded-full'/>
     </div>
   )
 }
