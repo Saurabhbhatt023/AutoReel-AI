@@ -1,30 +1,81 @@
-import { Input } from '@/components/ui/input'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+"use client" 
+import { Button } from '@/components/ui/button'; 
+import { Input } from '@/components/ui/input' 
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs" 
+import { Textarea } from "@/components/ui/textarea" 
+import { SparkleIcon } from 'lucide-react';
 
-import React from 'react'
+const suggestions = [
+    "Historic Story",
+    "Kids Story",
+    "Movie Stories",
+    "AI Innovations",
+    "Space Mysteries",
+    "Horror Stories",
+    "Mythological Tales",
+    "Tech Breakthroughs",
+    "True Crime Stories",
+    "Fantasy Adventures",
+    "Science Experiments",
+    "Motivational Stories",
+];
 
-const Topic = () => {
-  return (
-    <div>
-        <h2 className='mb-1'>Project Title</h2>
-        <Input placeholder = "Enter Project Title"/>
+import React, { useState } from 'react'
 
-         <div className='mt-5'> 
-       <h2>Video Topic</h2>
-       <p className='text-sm text-gray-600'>Select topic for your video</p>
-
-       <Tabs defaultValue="suggestion" className="w-[400px]">
-  <TabsList>
-    <TabsTrigger value="suggestion">Suggestions</TabsTrigger>
-    <TabsTrigger value="your_topic">Your Topic</TabsTrigger>
-  </TabsList>
-  <TabsContent value="suggestion">Make changes to your account here.</TabsContent>
-  <TabsContent value="your_topic">Change your password here.</TabsContent>
-</Tabs>
-
-       </div>
-    </div>
-  )
+const Topic = ({onHandleInputChange}) => {
+    const [selectTopic, setSelectedTopic] = useState('') // Initialize with empty string
+    
+    return (
+        <div>
+            <div>
+                <h1>Project Title</h1>
+                <Input placeholder="Enter project title" onChange= {(event)=> onHandleInputChange('title', event?.target.value)}/>
+            </div>
+            
+            <div>
+                <h1>Video Topic</h1>
+                <p>Select topic for your video</p>
+                
+                <Tabs defaultValue="suggestions">
+                    <TabsList>
+                        <TabsTrigger value="suggestions">Suggestions</TabsTrigger>
+                        <TabsTrigger value="topic">Your Topic</TabsTrigger>
+                    </TabsList>
+                    
+                    <TabsContent value="suggestions">
+  {suggestions.map((suggestion, index) => (
+    <Button
+      key={index}
+      onClick={() => {
+        setSelectedTopic(suggestion);
+        onHandleInputChange('topic', suggestion);
+      }}
+      className={`m-2 transition-colors ${
+        suggestion === selectTopic
+          ? 'bg-secondary text-white border border-white hover:bg-secondary'
+          : ''
+      }`}
+    >
+      {suggestion}
+    </Button>
+  ))}
+</TabsContent>
+                    
+                    <TabsContent value= "topic"> 
+                        <div>
+                          <h2>Enter your own topic</h2>
+                          
+                          <Textarea 
+                            placeholder="Enter your topic"
+                            onChange= {(event) => onHandleInputChange('topic', event.target.value)}
+                          />
+                        </div>
+                    </TabsContent>
+                </Tabs>
+            </div>
+            <Button className="mt-3" size="small"> <SparkleIcon />Generate Script </Button>
+        </div>
+    )
 }
 
-export default Topic 
+export default Topic
