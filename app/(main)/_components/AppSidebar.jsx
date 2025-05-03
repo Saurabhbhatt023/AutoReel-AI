@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import {
     Sidebar,
@@ -12,8 +13,10 @@ import {
 
   import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-import { HomeIcon, LucideFileVideo, Search, WalletCards } from 'lucide-react'
+import { Gem, HomeIcon, LucideFileVideo, Search, WalletCards } from 'lucide-react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+// import { usePathname } from 'next/navigation'
 
 const MenuItems = [
 
@@ -41,6 +44,9 @@ const MenuItems = [
     },
 ]
 const AppSidebar = () => {
+    const path = usePathname();
+    console.log(path)
+    
   return (
     <Sidebar>
       <SidebarHeader>
@@ -57,15 +63,15 @@ const AppSidebar = () => {
       </SidebarHeader>
       <SidebarContent>
          <SidebarGroup>
-            <div className='mx-5 mt-10'>
+            <div className='mx-3 mt-10'>
                 <Button className= "w-full">+Create New video</Button>
             </div>
             <SidebarMenu>
                 {MenuItems.map((menu, index) => (
                  
 
-                    <SidebarMenuItem className= "mt-3">
-                        <SidebarMenuButton className= "p-5" >
+                    <SidebarMenuItem className= "mt-3 mx-3">
+                        <SidebarMenuButton isActive = {path == menu.url} className= "p-5" >
                             <Link href= {menu.url} className='flex items-center gap-4 p-3'>
                               <menu.icon/>
                               <span>{menu?.title}</span>
@@ -77,7 +83,16 @@ const AppSidebar = () => {
             </SidebarMenu>
          </SidebarGroup> 
       </SidebarContent>
-      <SidebarFooter></SidebarFooter>
+      <SidebarFooter>
+    <div className='p-5 border rounded-lg mb-6 bg-gray-700'>  
+        <div className='flex items-center justify-between'>
+            <Gem className='text-gray-400'/>
+            <h2>5 Credits Left</h2>
+        </div>
+
+        <Button className= "w-full mt-3" > Buy More Credits</Button>
+        </div>
+      </SidebarFooter>
     </Sidebar>
   )
 }
