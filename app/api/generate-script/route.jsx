@@ -4,7 +4,7 @@ export async function POST(req) {
   try {
     // Extract topic from request body
     const { topic } = await req.json();
-    console.log("Received topic:", topic);
+    console.log("[topic: '" + topic + "']");
     
     if (!topic) {
       return NextResponse.json({ 
@@ -59,16 +59,26 @@ export async function POST(req) {
     }
 
     const result = await response.json();
-    console.log("Raw API response:", result);
     
-    // Process the Gemini API response structure
+    // Process the Gemini API response
     if (result.candidates && result.candidates[0].content && result.candidates[0].content.parts) {
       const text = result.candidates[0].content.parts[0].text;
       
       // Try to parse as JSON
       try {
         const jsonData = JSON.parse(text);
-        console.log("Parsed JSON data:", jsonData);
+        
+        // Log in the format shown in the screenshot
+        console.log("[scripts: Array(2)]", jsonData.scripts.length);
+        console.log("▼ scripts: Array(2)");
+        
+        jsonData.scripts.forEach((script, index) => {
+          console.log(`▼ ${index}: {content: '${script.content.substring(0, 40)}...`);
+        });
+        
+        console.log("▶ [[Prototype]]: Array(0)");
+        console.log("▶ [[Prototype]]: Object");
+        
         return NextResponse.json(jsonData);
       } catch (error) {
         console.error("Failed to parse JSON response:", error);
@@ -81,7 +91,17 @@ export async function POST(req) {
           ]
         };
         
-        console.log("Formatted response:", formattedResponse);
+        // Log in the format shown in the screenshot
+        console.log("[scripts: Array(2)]", formattedResponse.scripts.length);
+        console.log("▼ scripts: Array(2)");
+        
+        formattedResponse.scripts.forEach((script, index) => {
+          console.log(`▼ ${index}: {content: '${script.content.substring(0, 40)}...`);
+        });
+        
+        console.log("▶ [[Prototype]]: Array(0)");
+        console.log("▶ [[Prototype]]: Object");
+        
         return NextResponse.json(formattedResponse);
       }
     } else {
