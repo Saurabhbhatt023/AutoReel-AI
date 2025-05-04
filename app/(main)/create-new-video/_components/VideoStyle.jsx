@@ -1,5 +1,5 @@
 import { Image as ImageIcon } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 
 const options = [
   {
@@ -29,6 +29,13 @@ const options = [
 ]
 
 const VideoStyle = ({ onHandleInputChange }) => {
+  const [selectedStyle, setSelectedStyle] = useState('')
+  
+  const handleStyleSelect = (optionName) => {
+    setSelectedStyle(optionName);
+    onHandleInputChange('style', optionName);
+  }
+
   return (
     <div>
       <h1>VideoStyle</h1>
@@ -37,21 +44,30 @@ const VideoStyle = ({ onHandleInputChange }) => {
         {options?.map((option, index) => (
           <div 
             key={index}
-            onClick={() => onHandleInputChange('style', option.name)}
-            className="cursor-pointer"
+            onClick={() => handleStyleSelect(option.name)}
+            className="cursor-pointer relative group"
           >
             {option.image ? (
-              <img 
-                src={option.image} 
-                alt={option.name}
-                className='object-cover h-[70px] lg:h-[90px] xl:h-[180px] w-full rounded'
-              />
+              <div className="relative">
+                <img 
+                  src={option.image} 
+                  alt={option.name}
+                  className={`object-cover h-[70px] lg:h-[90px] xl:h-[180px] w-full rounded 
+                    group-hover:border-2 group-hover:border-white
+                    ${option.name === selectedStyle ? 'border-2 border-white' : ''}`}
+                />
+                <h2 className='absolute bottom-1 left-0 right-0 text-center text-white text-sm bg-black bg-opacity-50 px-1'>
+                  {option.name}
+                </h2>
+              </div>
             ) : (
-              <div className='flex items-center justify-center h-[70px] lg:h-[90px] xl:h-[180px] bg-gray-100 rounded'>
-                <ImageIcon className='text-gray-400' />
+              <div className={`flex flex-col items-center justify-center h-[70px] lg:h-[90px] xl:h-[180px] bg-gray-100 rounded 
+                group-hover:border-2 group-hover:border-gray-300
+                ${option.name === selectedStyle ? 'border-2 border-gray-500' : ''}`}>
+                <ImageIcon className="text-gray-500" />
+                <h2 className='text-center text-sm mt-1'>{option.name}</h2>
               </div>
             )}
-            <p className='text-center mt-1 text-sm'>{option.name}</p>
           </div>
         ))}
       </div>
