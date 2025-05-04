@@ -32,9 +32,9 @@ const Header = () => {
             <Button>Dashboard</Button>
             </Link>
            
-            {user.photoURL ? (
+            {user?.pictureURL ? (
               <Image 
-                src={user.photoURL} 
+                src={user.pictureURL} 
                 alt="User Image" 
                 width={40} 
                 height={40} 
