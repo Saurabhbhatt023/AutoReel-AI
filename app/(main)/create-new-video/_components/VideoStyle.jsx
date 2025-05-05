@@ -1,78 +1,77 @@
-import { Image as ImageIcon } from 'lucide-react'
+"use client"
 import React, { useState } from 'react'
+import Image from 'next/image'
 
-const options = [
-  {
-    name: 'Realistic',
-    image: '/realistic.png'
-  },
-  {
-    name: 'Cinematic',
-    image: '/cinematic.png'
-  },
-  {
-    name: 'Cartoon',
-    image: '/cartoon.png'
-  },
-  {
-    name: 'Watercolor',
-    image: '/watercolor.png'
-  },
-  {
-    name: 'Cyberpunk',
-    image: '/cyberpunk.png'
-  },
-  {
-    name: 'GTA',
-    image: '/gta.png'
-  },
+// Export these options so Preview component can import them
+export const options = [
+    {
+        name: 'Realistic',
+        value: 'realistic',
+        image: '/realistic.png'
+    },
+    {
+        name: 'Cinematic',
+        value: 'cinematic',
+        image: '/cinematic.png'
+    },
+    {
+        name: 'Cartoon',
+        value: 'cartoon',
+        image: '/cartoon.png'
+    },
+    {
+        name: 'Watercolor',
+        value: 'watercolor',
+        image: '/watercolor.png'
+    },
+    {
+        name: 'Cyberpunk',
+        value: 'cyberpunk',
+        image: '/cyberpunk.png'
+    },
+    {
+        name: 'GTA',
+        value: 'gta',
+        image: '/gta.png'
+    },
+    {
+        name: 'Anim',
+        value: 'anim',
+        image: '/anim.png'
+    }
 ]
 
 const VideoStyle = ({ onHandleInputChange }) => {
-  const [selectedStyle, setSelectedStyle] = useState('')
-  
-  const handleStyleSelect = (optionName) => {
-    setSelectedStyle(optionName);
-    onHandleInputChange('style', optionName);
-  }
+    const [selectedStyle, setSelectedStyle] = useState('');
 
-  return (
-    <div>
-      <h1>VideoStyle</h1>
-      <p className='text-sm text-gray-400 mb-1'>Select video style</p>
-      <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-2'>
-        {options?.map((option, index) => (
-          <div 
-            key={index}
-            onClick={() => handleStyleSelect(option.name)}
-            className="cursor-pointer relative group"
-          >
-            {option.image ? (
-              <div className="relative">
-                <img 
-                  src={option.image} 
-                  alt={option.name}
-                  className={`object-cover h-[70px] lg:h-[90px] xl:h-[180px] w-full rounded 
-                    group-hover:border-2 group-hover:border-white
-                    ${option.name === selectedStyle ? 'border-2 border-white' : ''}`}
-                />
-                <h2 className='absolute bottom-1 left-0 right-0 text-center text-white text-sm bg-black bg-opacity-50 px-1'>
-                  {option.name}
-                </h2>
-              </div>
-            ) : (
-              <div className={`flex flex-col items-center justify-center h-[70px] lg:h-[90px] xl:h-[180px] bg-gray-100 rounded 
-                group-hover:border-2 group-hover:border-gray-300
-                ${option.name === selectedStyle ? 'border-2 border-gray-500' : ''}`}>
-                <ImageIcon className="text-gray-500" />
-                <h2 className='text-center text-sm mt-1'>{option.name}</h2>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
-  )
+    return (
+        <div className="mb-5">
+            <h2 className="text-xl mb-2">Video Styles</h2>
+            <p className="text-sm text-gray-500 mb-3">Select video style</p>
+            
+            <div className="grid grid-cols-3 gap-3 w-full">
+                {options.map((item) => (
+                    <div 
+                        key={item.value}
+                        className={`cursor-pointer border rounded-lg p-2 hover:border-blue-500 w-full ${selectedStyle === item.value ? 'border-white' : 'border-gray-700'}`}
+                        onClick={() => {
+                            setSelectedStyle(item.value);
+                            onHandleInputChange('videoStyle', item.value);
+                        }}
+                    >
+                        <Image 
+                            src={item.image} 
+                            alt={item.name} 
+                            width={400} 
+                            height={200}
+                            className="w-full h-24 object-cover rounded mb-2"
+                        />
+                        <p className="text-center text-sm">{item.name}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
 }
 
 export default VideoStyle
