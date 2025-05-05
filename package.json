@@ -20,6 +20,7 @@
     "clsx": "^2.1.1",
     "convex": "^1.24.0",
     "firebase": "^11.6.1",
+    "inngest": "^3.35.1",
     "lucide-react": "^0.506.0",
     "next": "15.3.1",
     "next-themes": "^0.4.6",
