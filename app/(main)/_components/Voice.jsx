@@ -1,5 +1,6 @@
 'use client'
-import { ScrollArea } from '@radix-ui/react-scroll-area';
+import { ScrollArea } from "@/components/ui/scroll-area";
+
 import React from 'react';
 import { useState } from 'react';
 
@@ -47,7 +48,7 @@ function getVoiceOptions() {
     return voiceOptions;
 }
 
-const Voice = () => {
+const Voice = ({onHandleInputChange}) => {
     const[selectedVoice , setSelectedVoice] = useState()
   const voiceOptions = getVoiceOptions();
   
@@ -60,7 +61,9 @@ const Voice = () => {
       <div className='grid grid-cols-2 gap-3'>
         {voiceOptions.map((voice, index) => (
            <div key={index}> 
-       <h1 className={`cursor-pointer p-3 dark:bg-slate-900 dark:border-white rounded-lg hover:border ${voice.name == selectedVoice && "border"} `} onClick={() => setSelectedVoice(voice.name)} key={index}>    {voice.name}  </h1>   
+       <h1 className={`cursor-pointer p-3 dark:bg-slate-900 dark:border-white rounded-lg hover:border ${voice.name == selectedVoice && "border"} `} onClick={() => {setSelectedVoice(voice.name)
+        onHandleInputChange('voice', voice.value)
+       }} key={index}>    {voice.name}  </h1>   
            </div>
         ))}
       </div>
