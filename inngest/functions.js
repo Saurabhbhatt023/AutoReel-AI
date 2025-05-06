@@ -1,3 +1,4 @@
+import axios from "axios";
 import { inngest } from "./client";
 
 export const helloWorld = inngest.createFunction(
@@ -41,4 +42,4 @@ export const GenerateVideoData = inngest.createFunction(
     // (You may want to return or use `GenerateAudioFile` here.)
   }
 
-
+)

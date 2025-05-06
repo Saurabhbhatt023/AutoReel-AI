@@ -6,43 +6,17 @@ import { useState } from 'react';
 
 function getVoiceOptions() {
     const voiceOptions = [
-        {
-            "value": "af_sarah",
-            "name": "🇺🇸 Sarah (Female)" 
-        },
-        {
-            "value": "af_sky",
-            "name": "🇬🇧 Sky (Female)"
-        },
-        {
-            "value": "am_adam",
-            "name": "🇺🇸 Adam (Male)",
-            "selected": true
-        },
-        {
-            "value": "hf_alpha",
-            "name": "🇺🇸 Alpha (Female)"
-        },
-        {
-            "value": "am_fenrir",
-            "name": "🇳🇴 Fenrir (Male)"
-        },
-        {
-            "value": "am_liam",
-            "name": "🇮🇪 Liam (Male)"
-        },
-        {
-            "value": "am_michael",
-            "name": "🇺🇸 Michael (Male)"
-        },
-        {
-            "value": "am_onyx",
-            "name": "🇬🇧 Onyx (Male)"
-        },
-        {
-            "value": "hf_beta",
-            "name": "🇺🇸 Beta (Female)"
-        }
+        { value: "af_alloy", name: "🇺🇸 Alloy (Female)" },
+        { value: "af_aoede", name: "🇺🇸 Aoede (Female)" },
+        { value: "af_bella", name: "🇺🇸 Bella (Female)" },
+        { value: "af_jessica", name: "🇺🇸 Jessica (Female)" },
+        { value: "af_kore", name: "🇺🇸 Kore (Female)" },
+        { value: "af_nicole", name: "🎧 Nicole (Female)" },
+        { value: "af_nova", name: "🇺🇸 Nova (Female)" },
+        { value: "af_river", name: "🇺🇸 River (Female)" },
+        { value: "af_sarah", name: "🇺🇸 Sarah (Female)" },
+        { value: "af_sky", name: "🇺🇸 Sky (Female)" },
+        { value: "am_adam", name: "🇺🇸 Adam (Male)", selected: true }
     ];
     
     return voiceOptions;

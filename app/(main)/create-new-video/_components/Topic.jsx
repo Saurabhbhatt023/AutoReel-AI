@@ -165,9 +165,8 @@ const Topic = ({ onHandleInputChange }) => {
                                     className={`p-4 border rounded-lg cursor-pointer hover:border-gray-400 ${selectedScriptIndex === index ? 'border-white bg-secondary' : 'border-gray-600'}`}
                                     onClick={() => {
                                         setSelectedScriptIndex(index);
-                                        if (typeof onHandleInputChange === 'function' && item && item.content) {
-                                            onHandleInputChange('selectedScript', item.content);
-                                        }
+                                        onHandleInputChange('script', item.content); // Pass the selected script content to parent
+                                      
                                      }}
                                 >
                                     <h3 className="font-bold mb-2">Script {index + 1}</h3>
