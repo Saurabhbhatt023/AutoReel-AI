@@ -34,11 +34,7 @@ export const options = [
         value: 'gta',
         image: '/gta.png'
     },
-    {
-        name: 'Anim',
-        value: 'anim',
-        image: '/anim.png'
-    }
+    
 ]
 
 const VideoStyle = ({ onHandleInputChange }) => {
